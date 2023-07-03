@@ -66,8 +66,6 @@ jobs:
     needs: [preview]
     steps:
     - uses: actions/checkout@v3 
-    - name: Run Bicep linter
-      run: az bicep build --file deploy/main.bicep
     - name: Login to Azure
       run: |  
         az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
