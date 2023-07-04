@@ -41,7 +41,7 @@ jobs:
     needs: deploy-test
     with:
       environmentType: Production
-      resourceGroupName: ToyWebsiteProduction
+      resourceGroupName: jarmohakala_rg
       environmentNameSuffix: "prod"
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID}}
