@@ -33,12 +33,15 @@ jobs:
       resourceGroupName: jarmohakala_rg
       environmentNameSuffix: "test"
       reviewApiUrl: https://sandbox.contoso.com/reviews
+      sqlServerAdministratorLogin: TestToyCompanyAdmin
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }} #  ${{ secrets.AZURE_CLIENT_ID_TEST }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
       reviewApiKey: ${{ secrets.REVIEW_API_KEY_TEST }}
+      sqlServerAdministratorLoginPassword: ${{ secrets.SQL_SERVER_ADMINISTRATOR_LOGIN_PASSWORD_TEST }}
+
 
 
   #Deploy to the production environment.
@@ -53,9 +56,12 @@ jobs:
       resourceGroupName: jarmohakala_rg
       environmentNameSuffix: "prod"
       reviewApiUrl: https://api.contoso.com/reviews
+      sqlServerAdministratorLogin: ToyCompanyAdmin
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID}}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
       reviewApiKey: ${{ secrets.REVIEW_API_KEY_PRODUCTION }}
+      sqlServerAdministratorLoginPassword: ${{ secrets.SQL_SERVER_ADMINISTRATOR_LOGIN_PASSWORD_PRODUCTION }}
+
