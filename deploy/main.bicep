@@ -22,11 +22,11 @@ param environmentNameSuffix string
 param resourceNameSuffix string = substring('${environmentNameSuffix}${uniqueString(resourceGroup().id)}', 0, 12)
 
 // Define the names for resources.
-var appServiceAppName = 'toy-website-${resourceNameSuffix}-${environmentNameSuffix}'
-var appServicePlanName = 'toy-website-${environmentNameSuffix}-${environmentNameSuffix}'
-var logAnalyticsWorkspaceName = 'workspace-${resourceNameSuffix}-${environmentNameSuffix}'
-var applicationInsightsName = 'toywebsite${environmentNameSuffix}'
-var storageAccountName = 'mystorage${resourceNameSuffix}${environmentNameSuffix}'
+var appServiceAppName = 'toy-website-${resourceNameSuffix}'
+var appServicePlanName = 'toy-website-${resourceNameSuffix}'
+var logAnalyticsWorkspaceName = 'workspace-${resourceNameSuffix}'
+var applicationInsightsName = 'toywebsite${resourceNameSuffix}'
+var storageAccountName = 'mystorage${resourceNameSuffix}'
 
 // Define the SKUs for each component based on the environment type.
 var environmentConfigurationMap = {
