@@ -15,11 +15,16 @@ param environmentType string
 ])
 param environmentNameSuffix string
 
-//param resourceNameSuffix string = '${environmentNameSuffix}${uniqueString(resourceGroup().id)}'
-
 @description('A unique suffix to add to resource names that need to be globally unique.')
 @maxLength(13)
 param resourceNameSuffix string = substring('${environmentNameSuffix}${uniqueString(resourceGroup().id)}', 0, 12)
+
+@description('The URL to the product review API.')
+param reviewApiUrl string
+
+@secure()
+@description('The API key to use when accessing the product review API.')
+param reviewApiKey string
 
 // Define the names for resources.
 var appServiceAppName = 'toy-website-${resourceNameSuffix}'
@@ -78,6 +83,14 @@ resource appServiceApp 'Microsoft.Web/sites@2022-03-01' = {
         {
           name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
           value: applicationInsights.properties.ConnectionString
+        }
+        {
+          name: 'ReviewApiUrl'
+          value: reviewApiUrl
+        }
+        {
+          name: 'ReviewApiKey'
+          value: reviewApiKey
         }
       ]
     }
