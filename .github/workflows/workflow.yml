@@ -17,6 +17,9 @@ permissions:
 
 jobs:
 
+  # Build the application and database.
+  build:
+    uses: ./.github/workflows/build.yml
   # Lint the Bicep file.
   lint:
     uses: ./.github/workflows/lint.yml
@@ -24,7 +27,7 @@ jobs:
   # Deploy to the test environment.
   deploy-test:
     uses: ./.github/workflows/deploy.yml
-    needs: lint
+    needs: [build, lint]
     with:
       environmentType: Test
       resourceGroupName: jarmohakala_rg
@@ -41,7 +44,10 @@ jobs:
   #Deploy to the production environment.
   deploy-production:
     uses: ./.github/workflows/deploy.yml
-    needs: deploy-test
+    needs:
+      - build
+      - lint
+      - deploy-test
     with:
       environmentType: Production
       resourceGroupName: jarmohakala_rg
