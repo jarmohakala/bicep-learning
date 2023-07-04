@@ -45,6 +45,9 @@ var sqlDatabaseName = 'Toys'
 // Define the connection string to access Azure SQL.
 var sqlDatabaseConnectionString = 'Server=tcp:${sqlServer.properties.fullyQualifiedDomainName},1433;Initial Catalog=${sqlDatabase.name};Persist Security Info=False;User ID=${sqlServerAdministratorLogin};Password=${sqlServerAdministratorLoginPassword};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;'
 
+var appServiceAppLinuxFrameworkVersion = 'node|14-lts'
+
+
 // Define the SKUs for each component based on the environment type.
 var environmentConfigurationMap = {
   Production: {
@@ -90,6 +93,10 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: appServicePlanName
   location: location
   sku: environmentConfigurationMap[environmentType].appServicePlan.sku
+  kind: 'linux'
+  properties: {
+    reserved: true
+  }
 }
 
 resource appServiceApp 'Microsoft.Web/sites@2022-03-01' = {
@@ -99,6 +106,7 @@ resource appServiceApp 'Microsoft.Web/sites@2022-03-01' = {
     serverFarmId: appServicePlan.id
     httpsOnly: true
     siteConfig: {
+      linuxFxVersion: 'node|14-lts'
       appSettings: [
         {
           name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
