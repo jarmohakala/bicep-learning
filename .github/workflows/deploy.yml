@@ -52,6 +52,7 @@ jobs:
         template: ./deploy/main.bicep
         parameters: >
           environmentType=${{ inputs.environmentType }}
+          environmentNameSuffix=${{ inputs.environmentNameSuffix }}
         additionalArguments: --what-if
 
   deploy:
