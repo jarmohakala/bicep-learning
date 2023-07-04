@@ -15,9 +15,11 @@ param environmentType string
 ])
 param environmentNameSuffix string
 
+//param resourceNameSuffix string = '${environmentNameSuffix}${uniqueString(resourceGroup().id)}'
+
 @description('A unique suffix to add to resource names that need to be globally unique.')
 @maxLength(13)
-param resourceNameSuffix string = uniqueString(resourceGroup().id)
+param resourceNameSuffix string = substring('${environmentNameSuffix}${uniqueString(resourceGroup().id)}', 0, 12)
 
 // Define the names for resources.
 var appServiceAppName = 'toy-website-${resourceNameSuffix}-${environmentNameSuffix}'
