@@ -8,16 +8,23 @@ param location string = resourceGroup().location
 ])
 param environmentType string
 
+@description('Enviroment name for suffixing for one rg')
+@allowed([
+  'test'
+  'prod'
+])
+param environmentNameSuffix string
+
 @description('A unique suffix to add to resource names that need to be globally unique.')
 @maxLength(13)
 param resourceNameSuffix string = uniqueString(resourceGroup().id)
 
 // Define the names for resources.
-var appServiceAppName = 'toy-website-${resourceNameSuffix}'
-var appServicePlanName = 'toy-website'
-var logAnalyticsWorkspaceName = 'workspace-${resourceNameSuffix}'
-var applicationInsightsName = 'toywebsite'
-var storageAccountName = 'mystorage${resourceNameSuffix}'
+var appServiceAppName = 'toy-website-${resourceNameSuffix}-${environmentNameSuffix}'
+var appServicePlanName = 'toy-website-${environmentNameSuffix}-${environmentNameSuffix}'
+var logAnalyticsWorkspaceName = 'workspace-${resourceNameSuffix}-${environmentNameSuffix}'
+var applicationInsightsName = 'toywebsite${environmentNameSuffix}'
+var storageAccountName = 'mystorage${resourceNameSuffix}${environmentNameSuffix}'
 
 // Define the SKUs for each component based on the environment type.
 var environmentConfigurationMap = {
