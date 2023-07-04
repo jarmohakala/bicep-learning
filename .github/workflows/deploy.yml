@@ -41,6 +41,7 @@ jobs:
         template: ./deploy/main.bicep
         parameters: >
           environmentType=${{ inputs.environmentType }}
+          environmentNameSuffix=${{ inputs.environmentNameSuffix }}
         deploymentMode: Validate
     - if: inputs.environmentType == 'Production'
       uses: azure/arm-deploy@v1
