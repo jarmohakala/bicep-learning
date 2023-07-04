@@ -27,7 +27,7 @@ jobs:
     needs: lint
     with:
       environmentType: Test
-      resourceGroupName: jarmohakala_rg_test
+      resourceGroupName: jarmohakala_rg
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }} #  ${{ secrets.AZURE_CLIENT_ID_TEST }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
